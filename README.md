@@ -1,6 +1,11 @@
 # Mendudu
 Mendudu provides a simple, lightweight framework for building web servers in Lua. With features like routing, middleware, asynchronous task handling, and support for different content types, it offers a flexible and efficient way to handle HTTP requests. Its event-driven architecture, inspired by Node.js, makes it particularly well-suited for applications requiring high concurrency and low latency.
 
+# Install Mendudu
+`luarocks install mendudu`  
+
+Example how to use it (see under section Example usage).
+
 ## Selling Points of Mendudu:  
 - Event-Driven Architecture: Inspired by Node.js, Mendudu provides an event-driven model that allows for efficient handling of asynchronous tasks.  
 - Simple and Lightweight: Mendudu is designed to be lightweight and easy to use, making it ideal for small projects and rapid prototyping.  
