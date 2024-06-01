@@ -16,21 +16,19 @@ Coroutines: Coroutines are used to yield and resume tasks, simulating an asynchr
 ### 1. Event Loop
 Mendudu uses an event loop to handle asynchronous tasks. This allows the server to manage multiple tasks without blocking, ensuring efficient request handling.
 
-Function: runEventLoop()
+The event loop in the Mendudu framework is integrated and runs automatically when the server is started. Users do not need to perform any additional steps to utilize the event loop functionality. This simplifies the user experience, allowing users to focus on defining routes and middleware.
 
-Continuously checks and executes tasks from the task queue (taskQueue) and microtask queue (microtaskQueue).
-Executes all microtasks before handling tasks from the task queue, ensuring higher priority tasks are completed first.
-2. Task and Microtask Queue
-Tasks and microtasks are managed in separate queues, enabling fine-grained control over the execution order.
+- Function: runEventLoop()
+Continuously processes tasks and microtasks.
+Task and Microtask Queues: Internal mechanisms for managing asynchronous tasks.
 
-Functions: addTask(task), addMicrotask(microtask)
+- Functions: addTask(task), addMicrotask(microtask)
+Used internally to schedule tasks and microtasks.
 
-addTask: Adds a task to the task queue, which will be executed by the event loop.
-addMicrotask: Adds a microtask to the microtask queue, which will be executed before tasks in the task queue.
 ### 3. Routing
 Define routes for different HTTP methods (GET, POST, PUT, PATCH, DELETE) and paths. Each route has an associated handler function that processes the request.
 
-Function: registerRoute(method, path, handler)
+- Function: registerRoute(method, path, handler)
 
 Registers a route with the specified HTTP method and path.
 The handler function processes the request and returns the response. 
@@ -38,7 +36,7 @@ The handler function processes the request and returns the response.
 ### 4. Middleware
 Middleware functions can be added to process requests before they reach the route handler. This is useful for logging, authentication, and other pre-processing tasks.
 
-Function: use(middlewareFunc)
+- Function: use(middlewareFunc)
 
 Adds a middleware function to the middleware stack.
 Middleware functions receive the HTTP method and path of the request.
@@ -46,7 +44,7 @@ Middleware functions receive the HTTP method and path of the request.
 ### 5. Content-Type Support
 Handlers can return different content types, such as JSON or plain text, allowing for flexible response formats.
 
-Function: Route handlers return (status, contentType, responseBody)
+- Function: Route handlers return (status, contentType, responseBody)
 
 Handlers return the HTTP status code, content type, and response body.
 Example: return 200, "application/json", json.encode(data)
@@ -54,7 +52,7 @@ Example: return 200, "application/json", json.encode(data)
 ### 6. Server Setup
 Starts the web server on a specified port and begins accepting and handling client connections.
 
-Function: startServer(port)
+- Function: startServer(port)
 
 Binds the server to the specified port and sets it to non-blocking mode.
 Accepts client connections and adds them to the task queue for processing.
