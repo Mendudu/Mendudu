@@ -321,6 +321,8 @@ Start the service:
 To stop the service:  
 `nssm start MenduduService`  
 
+By following these steps, you can set up your Mendudu application to run continuously on a Windows server, with automatic restarts if the application crashes.  
+
 To remove the service:  
 `nssm remove MenduduService confirm`  
 
