@@ -103,3 +103,15 @@ use(middlewareFunc)
 startServer(port)
 - port: Port number to bind the server to (e.g., 8080).
 - Initializes the server and begins accepting client connections.
+
+### Release notes  
+
+#### Release Note for Mendudu 0.1-1
+We are excited to announce the first release of Mendudu, version 0.1-1, a simple and lightweight web framework for Lua. This initial release includes the following features:
+
+Features:  
+- Integrated Event Loop: Seamlessly handles asynchronous tasks, inspired by Node.js.  
+- Routing: Easily define routes for various HTTP methods (GET, POST, PUT, PATCH, DELETE).  
+- Middleware Support: Add middleware functions to process requests before they reach the route handler.  
+- Content-Type Support: Return different content types (e.g., JSON, text) to meet diverse client needs.  
+- Simple Logging: Basic logging for incoming requests using middleware  
