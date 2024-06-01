@@ -115,3 +115,120 @@ Features:
 - Middleware Support: Add middleware functions to process requests before they reach the route handler.  
 - Content-Type Support: Return different content types (e.g., JSON, text) to meet diverse client needs.  
 - Simple Logging: Basic logging for incoming requests using middleware  
+
+_________________________________________________________________________________
+
+### To run Mendudu on a server (e.g., a Linux server), you'll need to follow these steps  
+1. Install Lua: Ensure Lua is installed on your server.
+2. Install Dependencies: Install required Lua libraries (luasocket and dkjson) using LuaRocks.
+3. Set Up a Script to Run Mendudu: Create a Lua script to define your routes and start the server.
+4. Set Up a Service: Use a service manager like systemd to ensure your server runs continuously and restarts on crashes.
+
+# Step-by-step guide:
+
+## Step 1: Install Lua
+Install Lua on your server. For example, on a Debian-based system:
+```
+sudo apt-get update
+sudo apt-get install lua5.3
+```
+
+Or any other version of Lua. You can do:  
+`sudo apt-get update` update the package list.  
+`apt-cache search lua | grep lua5.4` search for Lua package (in this case 5.4)  
+If you see lua5.4 can you can just do:  
+`sudo apt-get install lua5.4`  
+
+If lua5.4 is not available, you will need to install it from source.  
+
+Installing Lua 5.4.2 from Source (Detailed Steps):  
+1. Install dependencies `sudo apt-get install -y build-essential libreadline-dev`  
+2. Download and Extract Lua 5.4.2  
+```
+curl -R -O http://www.lua.org/ftp/lua-5.4.2.tar.gz
+tar zxf lua-5.4.2.tar.gz
+```  
+3. Build and Install Lua  
+```
+cd lua-5.4.2
+make linux test
+sudo make install
+```
+
+This is applicable to other versions aswell.  
+
+## Step 2: Install LuaRocks  
+Install LuaRocks to manage Lua modules:
+`sudo apt-get install luarocks`
+
+## Step 3: Install Mendudu and Dependencies:  
+```
+luarocks install mendudu
+luarocks install dkjson
+luarocks install luasocket
+```
+## Step 4: Create Your Mendudu Application  
+
+Create a Lua script for your Mendudu-based application. For example, create app.lua:
+```
+local mendudu = require("mendudu")
+
+-- Define routes
+mendudu.registerRoute("GET", "/", function()
+    return 200, "text/plain", "Hello, World!"
+end)
+
+mendudu.registerRoute("GET", "/json", function()
+    local data = {
+        message = "Hello, World!",
+        status = "success"
+    }
+    return 200, "application/json", require("dkjson").encode(data)
+end)
+
+-- Add middleware
+mendudu.use(function(method, path)
+    print("Received " .. method .. " request for " .. path)
+end)
+
+-- Start the server
+mendudu.startServer(8080)
+```
+
+## Step 5: Set Up a Systemd Service  
+Create a systemd service to manage your application. Create a service file, e.g., /etc/systemd/system/mendudu.service:
+
+```
+[Unit]
+Description=Mendudu Web Framework Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/lua /path/to/your/app.lua
+Restart=always
+User=nobody
+Group=nogroup
+Environment=PATH=/usr/bin:/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/path/to/your/
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Replace /path/to/your/app.lua with the actual path to your app.lua script.  
+
+
+## Step 6: Enable and Start the Service  
+Enable and start the systemd service:  
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable mendudu
+sudo systemctl start mendudu
+```
+
+You can check the status of your service with:
+`sudo systemctl status mendudu`
+
+By following these steps, you can deploy and run your Mendudu-based web application on a Linux server, ensuring it remains running reliably even if it crashes.
