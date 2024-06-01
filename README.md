@@ -232,3 +232,95 @@ You can check the status of your service with:
 `sudo systemctl status mendudu`
 
 By following these steps, you can deploy and run your Mendudu-based web application on a Linux server, ensuring it remains running reliably even if it crashes.
+
+_________________________________________________________________________________
+
+### To run Mendudu on a windows server, you'll need to follow these steps  
+## Step 1: Install Lua
+1. Go to LuaBinaries (https://luabinaries.sourceforge.net/download.html) and download lua-5.4.2_Win64_bin.zip or the version you want.
+2. Create a new folder C:\Program Files\Lua.
+3. Extract the downloaded files into C:\Program Files\Lua.
+4. Set the system PATH:
+- Search for "System" in the search bar (left corner in Windows).
+- Go to "Advanced system settings" and click on the "Environment Variables" button.
+- Under the "System variables" section, find Path, select it, and press "Edit".
+- Press the "New" button and add C:\Program Files\Lua.
+- Click "OK", "OK", "OK" to close all dialogs.
+
+## Step 2: Install LuaRocks
+Download LuaRocks for Windows from the LuaRocks site (https://github.com/luarocks/luarocks/wiki/Download).
+
+Follow the instructions to install LuaRocks on Windows.
+
+After installation, open Command Prompt and run:
+```
+luarocks install luasocket
+luarocks install dkjson
+luarocks install mendudu
+``` 
+## Step 3: Create Your Mendudu Application
+Create your app.lua script in a directory, e.g., C:\MyMenduduApp:
+
+```
+local mendudu = require("mendudu")
+
+-- Define routes
+mendudu.registerRoute("GET", "/", function()
+    return 200, "text/plain", "Hello, World!"
+end)
+
+mendudu.registerRoute("GET", "/json", function()
+    local data = {
+        message = "Hello, World!",
+        status = "success"
+    }
+    return 200, "application/json", require("dkjson").encode(data)
+end)
+
+-- Add middleware
+mendudu.use(function(method, path)
+    print("Received " .. method .. " request for " .. path)
+end)
+
+-- Start the server
+mendudu.startServer(8080)
+``` 
+
+## Step 4: Run Your Application as a Service
+To run your Lua application as a Windows service, you can use NSSM (Non-Sucking Service Manager). Here's how:  
+
+### 1. Download NSSM:  
+Go to the NSSM website (https://nssm.cc/) and download the appropriate version for your system.
+Extract the files to a folder, e.g., C:\nssm.  
+
+### 2. Set Up the Service:  
+
+Open Command Prompt as Administrator.  
+
+Navigate to the NSSM folder:  
+`cd C:\nssm\win64`  
+
+Install your Lua application as a service using NSSM:  
+`nssm install MenduduService "C:\Program Files\Lua\lua.exe" "C:\MyMenduduApp\app.lua"`   
+
+This will open the NSSM GUI. Fill in the details:    
+
+Path: C:\Program Files\Lua\lua.exe  
+Startup Directory: C:\MyMenduduApp  
+Arguments: app.lua`  
+
+### 3. Configure the Service:  
+
+- In the NSSM GUI, you can set up various parameters such as the display name, description, and startup type.  
+- Click "Install Service" when done.
+
+### 4. Manage the Service:  
+Start the service:  
+`nssm start MenduduService`    
+
+To stop the service:  
+`nssm start MenduduService`  
+
+To remove the service:  
+`nssm remove MenduduService confirm`  
+
