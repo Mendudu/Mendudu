@@ -381,12 +381,20 @@ Ensure that your domain (mydomain.com) points to your server's IP address. This 
 For HTTPS, use Certbot to obtain and manage SSL certificates from Let’s Encrypt:
 
 1. Install Certbot:  
-`sudo apt-get install certbot python3-certbot-nginx`
+`sudo apt-get install certbot python3-certbot-nginx`  
+
+The python3-certbot-nginx package is specifically designed to automate the process of configuring Nginx for SSL, but if you prefer or have a minimal setup, installing just certbot is sufficient.
 
 2. Obtain and install the SSL certificate:
 `sudo certbot --nginx -d mydomain.com` 
 
 Follow the prompts to configure SSL. Certbot will automatically update your Nginx configuration to support HTTPS.
+
+Certbot installs a cron job or systemd timer to renew your certificates automatically. You can check the status of the automatic renewal process by running:
+`sudo systemctl status certbot.timer` 
+
+You can also manually test the renewal process:
+`sudo certbot renew --dry-run``
 
 
 ## Example for Windows (Nginx Installation)
