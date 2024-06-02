@@ -2,6 +2,7 @@ package = "mendudu"
 version = "0.1-1"
 source = {
     url = "https://mendudu.com/mendudu-0.1-1.tar.gz",
+    dir = "."
 }
 description = {
     summary = "Mendudu: A simple and lightweight Lua web framework",
