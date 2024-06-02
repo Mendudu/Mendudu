@@ -25,7 +25,9 @@ The event loop in the Mendudu framework is integrated and runs automatically whe
 
 - Function: runEventLoop()
 Continuously processes tasks and microtasks.
-Task and Microtask Queues: Internal mechanisms for managing asynchronous tasks.
+
+### 2. Task and Microtask Queues:  
+Internal mechanisms for managing asynchronous tasks.  
 
 - Functions: addTask(task), addMicrotask(microtask)
 Used internally to schedule tasks and microtasks.
