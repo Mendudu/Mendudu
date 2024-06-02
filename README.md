@@ -1,8 +1,18 @@
 # Mendudu
 Mendudu provides a simple, lightweight framework for building web servers in Lua. With features like routing, middleware, asynchronous task handling, and support for different content types, it offers a flexible and efficient way to handle HTTP requests. Its event-driven architecture, inspired by Node.js, makes it particularly well-suited for applications requiring high concurrency and low latency.
 
-# Install Mendudu
+# Install Mendudu (LuaRocks + get started with Lua)  
+Install via LuaRocks:  
 `luarocks install mendudu`  
+
+To install Lua & LuaRocks on Windows (to get started coding) you can follow Step 1 & Step 2 in:  
+[Install on Windows](https://github.com/Mendudu/Mendudu/blob/main/README.md#to-run-mendudu-on-a-windows-server-youll-need-to-follow-these-steps)
+
+You can also read my Lua guide to get started with Lua:  
+[Link to guide](https://docs.google.com/document/d/1lHE56qE8gr2fYI1Yfaus84UUIdqW0Phw_vJccuR22mo/edit?usp=sharing)
+
+Or official Lua reference manual (documentation):  
+[Link to Lua reference manual](https://lua.org/docs.html)  
 
 Example how to use it (see under section Example usage).
 
