@@ -390,7 +390,7 @@ Follow the prompts to configure SSL. Certbot will automatically update your Ngin
 
 
 ## Example for Windows (Nginx Installation)
-1) Download Nginx: Go to the Nginx download page and download the appropriate version for Windows.
+1) Download Nginx: Go to the Nginx download page (https://nginx.org/en/download.html) and download the appropriate version for Windows.
 2) Extract Nginx: Extract the downloaded files to a directory, e.g., C:\nginx.
 3) Configure Nginx: Edit the nginx.conf file located in the conf directory within the Nginx installation directory to include a configuration similar to the one above.
 4) Run Nginx: Start Nginx by running nginx.exe from the command prompt within the Nginx directory:
