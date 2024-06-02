@@ -75,6 +75,19 @@ Binds the server to the specified port and sets it to non-blocking mode.
 Accepts client connections and adds them to the task queue for processing.
 Prints a message indicating the server has started.
 
+### How the Automated Event Loop and Task Queue/Microtask Queue Work  
+Mendudu uses an event-driven architecture with a task queue and a microtask queue to handle asynchronous operations efficiently. Here’s a simple explanation of how it works:
+
+1. Task Queue: This queue holds tasks (functions) that are scheduled to be executed. Tasks are typically added to the task queue to handle new client connections or other time-consuming operations.
+
+2. Microtask Queue: This queue holds microtasks that are prioritized to run before tasks. Microtasks are generally smaller and quicker operations that need to be completed immediately.
+
+3. Event Loop: The event loop continuously processes tasks and microtasks. It ensures that microtasks are executed first, followed by tasks from the task queue. This loop runs indefinitely, ensuring the server remains responsive to incoming requests and other operations.
+
+4. Client Handling: Accepts client connections, processes requests, and sends responses.  
+
+By using this architecture, Mendudu ensures efficient handling of asynchronous operations, making it suitable for building scalable web applications. The event loop keeps the server responsive, while the task and microtask queues manage different types of operations effectively.
+
 ## Example usage  
 Here is an example of how to use Mendudu to create a simple web server:
 
