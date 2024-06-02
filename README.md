@@ -14,7 +14,7 @@ You can also read my Lua guide to get started with Lua:
 Or official Lua reference manual (documentation):  
 [Link to Lua reference manual](https://lua.org/docs.html)  
 
-Example how to use it (see under section Example usage).
+Example how to use it (see under section [Example usage](https://github.com/Mendudu/Mendudu/blob/main/README.md#example-usage) ).
 
 ## Selling Points of Mendudu:  
 - Event-Driven Architecture: Inspired by Node.js, Mendudu provides an event-driven model that allows for efficient handling of asynchronous tasks.  
