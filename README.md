@@ -277,6 +277,8 @@ Download LuaRocks for Windows from the LuaRocks site (https://github.com/luarock
 
 Follow the instructions to install LuaRocks on Windows.
 
+I also added install instructions and troubleshooting on our homepage (https://mendudu.com). Here you can find information about luabinaries + luarocks config and also how to install MinGW (gcc).  
+
 After installation, open Command Prompt and run:
 ```
 luarocks install luasocket
