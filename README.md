@@ -136,7 +136,7 @@ ________________________________________________________________________________
 3. Set Up a Script to Run Mendudu: Create a Lua script to define your routes and start the server.
 4. Set Up a Service: Use a service manager like systemd to ensure your server runs continuously and restarts on crashes.
 
-# Step-by-step guide:
+### Step-by-step guide:
 
 ## Step 1: Install Lua
 Install Lua on your server. For example, on a Debian-based system:
