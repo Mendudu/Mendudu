@@ -326,3 +326,80 @@ By following these steps, you can set up your Mendudu application to run continu
 To remove the service:  
 `nssm remove MenduduService confirm`  
 
+_________________________________________________________________________________
+
+### Expose application to the internet
+
+To expose your Lua application to the internet with a domain like mydomain.com/api/, you typically use a reverse proxy server such as Nginx. Nginx will handle incoming HTTP requests and forward them to your Lua application running on your server. This setup is beneficial for handling SSL termination, load balancing, and other web server tasks.
+
+## Step-by-Step Guide to Expose Your Lua Application
+
+### Step 1: Install Nginx  
+First, install Nginx on your server. On a Debian-based system, you can install Nginx with:  
+```
+sudo apt-get update
+sudo apt-get install nginx
+```
+For Windows, you can download Nginx from the Nginx website (https://nginx.org/) and follow the installation instructions for Windows.   
+
+### Step 2: Configure Nginx  
+Create an Nginx configuration file to set up the reverse proxy. Here’s an example configuration:
+
+1. Open or create a new configuration file for your site:
+`sudo nano /etc/nginx/sites-available/mydomain.com`
+
+2. Add the following configuration:
+```
+server {
+    listen 80;
+    server_name mydomain.com;
+
+    location /api/ {
+        proxy_pass http://localhost:8080/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+This configuration tells Nginx to listen on port 80 (standard HTTP port) and forward requests that match /api/ to your Lua application running on localhost:8080.
+
+3. Enable the configuration by creating a symlink to sites-enabled:  
+`sudo ln -s /etc/nginx/sites-available/mydomain.com /etc/nginx/sites-enabled/`  
+
+4. Test the Nginx configuration for syntax errors:  
+`sudo nginx -t`
+
+5. Reload Nginx to apply the changes:  
+`sudo systemctl reload nginx`
+
+### Step 3: Update DNS Settings  
+Ensure that your domain (mydomain.com) points to your server's IP address. This is done by updating the DNS settings with your domain registrar.
+
+### Step 4: Secure with SSL (Optional but recommended)
+For HTTPS, use Certbot to obtain and manage SSL certificates from Let’s Encrypt:
+
+1. Install Certbot:  
+`sudo apt-get install certbot python3-certbot-nginx`
+
+2. Obtain and install the SSL certificate:
+`sudo certbot --nginx -d mydomain.com` 
+
+Follow the prompts to configure SSL. Certbot will automatically update your Nginx configuration to support HTTPS.
+
+
+## Example for Windows (Nginx Installation)
+1) Download Nginx: Go to the Nginx download page and download the appropriate version for Windows.
+2) Extract Nginx: Extract the downloaded files to a directory, e.g., C:\nginx.
+3) Configure Nginx: Edit the nginx.conf file located in the conf directory within the Nginx installation directory to include a configuration similar to the one above.
+4) Run Nginx: Start Nginx by running nginx.exe from the command prompt within the Nginx directory:
+```
+cd C:\nginx
+start nginx
+```
+
+### Summary (Nginx as a reverse proxy)  
+By using Nginx as a reverse proxy, you can expose your Lua application to the internet, allowing users to access it via a domain name like mydomain.com/api/. Nginx handles the incoming requests and forwards them to your application, providing a robust and scalable solution for web application deployment.
+
+With SSL configured, your application will also benefit from encrypted communications, enhancing security for your users.
