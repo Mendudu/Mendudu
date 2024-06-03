@@ -131,7 +131,7 @@ startServer(port)
 
 ### Release notes  
 
-#### Release Note for Mendudu 0.1-1
+#### Release Note for Mendudu 0.1-1 (2024-06-02)
 We are excited to announce the first release of Mendudu, version 0.1-1, a simple and lightweight web framework for Lua. This initial release includes the following features:
 
 Features:  
