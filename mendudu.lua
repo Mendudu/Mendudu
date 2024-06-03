@@ -25,7 +25,7 @@ end
 
 -- Function to run the event loop
 local function runEventLoop()
-    while #taskQueue > 0 or #microtaskQueue > 0 do
+    while true do
         -- Execute all microtasks
         while #microtaskQueue > 0 do
             local microtask = table.remove(microtaskQueue, 1)
@@ -38,6 +38,9 @@ local function runEventLoop()
             local co = coroutine.create(task)
             coroutine.resume(co)
         end
+        
+        -- Yield to prevent 100% CPU usage in the absence of tasks
+        socket.sleep(0.01)
     end
 end
 
