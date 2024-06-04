@@ -1,7 +1,7 @@
 package = "mendudu"
-version = "0.2-1"
+version = "0.4-1"
 source = {
-    url = "https://mendudu.com/mendudu-0.2-1.tar.gz",
+    url = "https://mendudu.com/mendudu-0.4-1.tar.gz",
     dir = "."
 }
 description = {
@@ -18,6 +18,7 @@ dependencies = {
     "lua >= 5.1",
     "luasocket",
     "dkjson",
+    "luafilesystem",
 }
 build = {
     type = "builtin",
