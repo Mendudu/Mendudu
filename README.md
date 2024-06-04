@@ -66,7 +66,24 @@ Handlers can return different content types, such as JSON or plain text, allowin
 Handlers return the HTTP status code, content type, and response body.
 Example: return 200, "application/json", json.encode(data)
 
-### 6. Server Setup
+### 6. Static File Serving:
+serveStatic(directory): Serves static files from the specified directory.
+mendudu.serveStaticRoute(route, directory): Registers a route to serve static files.
+
+### 7. Query Parameter Parsing:
+parseQueryParams(queryString): Parses query parameters from the URL.
+parseRequest(request): Enhanced to extract and return query parameters.
+
+### 8. Request Body Parsing:
+parseJsonBody(body): Parses JSON body content from the request.
+
+### 9. Logging:
+logRequest(method, path, queryParams, body): Logs request details.
+
+### 10. Error Handling Middleware:
+errorHandler(method, path, queryParams, body): Unified error handling middleware.
+
+### 11. Server Setup
 Starts the web server on a specified port and begins accepting and handling client connections.
 
 - Function: startServer(port)
@@ -112,6 +129,9 @@ mendudu.use(function(method, path)
     print("Received " .. method .. " request for " .. path)
 end)
 
+-- Serve static files from the "static" directory
+mendudu.serveStaticRoute("/static", "path/to/static/files")
+
 -- Start the server
 mendudu.startServer(8080)
 ```
@@ -130,6 +150,15 @@ startServer(port)
 - Initializes the server and begins accepting client connections.
 
 ### Release notes  
+
+#### Release Note for Mendudu 0.4-1 (2024-06-04) 
+- Incorporating static file serving.  
+- query parameter parsing.  
+- request body parsing.  
+- logging, and error handling.  
+
+#### Release Note for Mendudu 0.3-1 (2024-06-04) 
+- Broken version with missing dependency (Not recommended ver update to latest). 
 
 #### Release Note for Mendudu 0.2-1 (2024-06-03)  
 - added yield to prevent 100% CPU usage in the absence of tasks - socket.sleep  
