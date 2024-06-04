@@ -223,6 +223,7 @@ Install LuaRocks to manage Lua modules:
 luarocks install mendudu
 luarocks install dkjson
 luarocks install luasocket
+luarocks install luafilesystem
 ```
 ## Step 4: Create Your Mendudu Application  
 
@@ -315,6 +316,7 @@ After installation, open Command Prompt and run:
 ```
 luarocks install luasocket
 luarocks install dkjson
+luarocks install luafilesystem
 luarocks install mendudu
 ``` 
 ## Step 3: Create Your Mendudu Application
